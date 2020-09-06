@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';ng 
 import { NgModule } from '@angular/core';
 import {environment} from '../environments/environment'
 import {StoreModule} from '@ngrx/store';
@@ -7,7 +8,9 @@ import {StoreDevtoolsModule} from '@ngrx/store-devtools';
 import {EffectsModule} from '@ngrx/effects';
 
 import { AppRoutingModule } from './app-routing.module';
+import {AngularMaterialModule} from './angular-material/angular-material.module'
 import { AppComponent } from './app.component';
+
 
 @NgModule({
   declarations: [
@@ -15,6 +18,7 @@ import { AppComponent } from './app.component';
   ],
   imports: [
     BrowserModule,
+    BrowserAnimationsModule,
     AppRoutingModule,
     StoreModule.forRoot({
       router: routerReducer
@@ -26,6 +30,8 @@ import { AppComponent } from './app.component';
       maxAge: 25,
       logOnly: environment.production
     }),
+    AngularMaterialModule
+    
   ],
   providers: [],
   bootstrap: [AppComponent]
