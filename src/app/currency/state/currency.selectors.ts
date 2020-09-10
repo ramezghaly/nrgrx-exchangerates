@@ -41,7 +41,6 @@ export const getTopFiveRates = createSelector(
 );
 
 
-
 export const getSelectedCurrencyHistory = createSelector(
     getCurrencyFeatureState,
     state => state.selectedCurrencyHistory
@@ -57,7 +56,7 @@ export const getTopRatesType = createSelector(
     state => state.topRatesType
 );
 
-function getHighestRates(rates: ExchangeRate[]): ExchangeRateDiff[]{
+const getHighestRates = function (rates: ExchangeRate[]): ExchangeRateDiff[] {
     return rates.filter(rate => rate.rate - rate.previousRate > 0)
     .sort(
         (rate1, rate2) => {
@@ -78,7 +77,7 @@ function getHighestRates(rates: ExchangeRate[]): ExchangeRateDiff[]{
             }));
 }
 
-function getLeastRates(rates: ExchangeRate[]): ExchangeRateDiff[]{
+const getLeastRates = function(rates: ExchangeRate[]): ExchangeRateDiff[]{
     return rates.filter(rate => rate.rate - rate.previousRate < 0)
     .sort(
         (rate1, rate2) => {

@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-
+import { Actions, createEffect, ofType } from '@ngrx/effects';
 import { switchMap, map, catchError, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
 
 import { ExchangeRatesService } from '../services/exchange-rates.service';
 import * as CurrencyActions from './currency.actions';
-import { Actions, createEffect, ofType } from '@ngrx/effects';
-import { ExchangeRates, ExchangeRate } from '../models';
+import { ExchangeRate } from '../models';
 
 @Injectable()
 export class CurrencyEffects {
@@ -27,19 +26,6 @@ export class CurrencyEffects {
             );
     });
 
-    // loadLatestRatesSuccess$ = createEffect(() => {
-    //     return this.actions$
-    //         .pipe(
-    //             ofType(CurrencyActions.loadLatestRatesSuccess),
-    //             map(action =>
-    //                 CurrencyActions.loadPreviousDayRates({
-    //                     date: action.rates.date,
-    //                     baseCurrency: action.rates.baseCurrency
-    //                 })
-    //             )
-    //         );
-    // });
-
     loadCurrencies$ = createEffect(() => {
         return this.actions$
             .pipe(
@@ -53,8 +39,6 @@ export class CurrencyEffects {
                 )
             );
     });
-
-   
 
     loadCurrencyHistory$ = createEffect(() => {
         return this.actions$

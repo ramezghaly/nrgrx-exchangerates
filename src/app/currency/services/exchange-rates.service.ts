@@ -3,17 +3,18 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
 import { ExchangeRates, ExchangeRate, ExchangeRateHistory } from '../models'
-import { DateService } from '../../shared/services/date.service';
+import { DateService } from '../../core/services/date.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExchangeRatesService {
   private apiBaseUrl = 'https://api.exchangeratesapi.io';
-  constructor(private http: HttpClient,
-    private dateService: DateService) { }
 
-  getlatestRates(baseCurrency: string | null): Observable<ExchangeRates> {
+  constructor(private http: HttpClient,
+              private dateService: DateService) { }
+
+  getlatestRates(baseCurrency: string): Observable<ExchangeRates> {
     return this.http.get<any>(`${this.apiBaseUrl}/latest`,
       {
         params: {
@@ -26,10 +27,10 @@ export class ExchangeRatesService {
         }),
         switchMap((data: any) => {
           let exchangeRates: ExchangeRate[] = [];
-          let date = new Date(Date.parse(data.date));
-          let previousDate = new Date(new Date().setDate(date.getDate() - 1))
+          let date = this.dateService.parseDate(data.date)
+          let previousDate = this.dateService.addDays(date,-1);
           return this.getRatesByDate(previousDate, data.base)
-            .pipe(
+            .pipe(  
               map(previousData => {
                 if (previousData && previousData.rates) {
                   Object.keys(data.rates)
@@ -55,7 +56,7 @@ export class ExchangeRatesService {
       );
   }
 
-  getRatesByDate(date: Date, baseCurrency: string | null): Observable<any> {
+  getRatesByDate(date: Date, baseCurrency: string): Observable<any> {
     if (!date) {
       return of({
         rates: [],
@@ -97,12 +98,12 @@ export class ExchangeRatesService {
           let history: { date: Date, rate: number }[] = [];
           if (data && data.rates) {
             Object.keys(data.rates).sort().forEach(date => {
-              history.push({ date: new Date(Date.parse(date)), rate: data.rates[date][currency] });
+              history.push({ date: this.dateService.parseDate(date), rate: data.rates[date][currency] });
             });
           }
           return {
-            startDate: new Date(Date.parse(data.start_at)),
-            endDate: new Date(Date.parse(data.end_at)),
+            startDate: this.dateService.parseDate(data.start_at),
+            endDate: this.dateService.parseDate(data.end_at),
             currency: currency,
             baseCurrency: data.base,
             history: history

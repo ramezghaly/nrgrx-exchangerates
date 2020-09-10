@@ -5,12 +5,14 @@ import * as CurrencyStates from './currency.state';
 
 export const currencyReducer = createReducer<CurrencyStates.CurrencyState>(
     CurrencyStates.initialCurrencyState,
+
     on(CurrencyActions.loadLatestRatesSuccess,
         (state, action): CurrencyStates.CurrencyState => {
             return {
                 ...state,
                 latestRates: action.rates,
-                latestRatesDate: action.rates.date
+                latestRatesDate: action.rates.date,
+                error: null
             };
         }),
     on(CurrencyActions.loadLatestRatesFailure,
@@ -30,12 +32,13 @@ export const currencyReducer = createReducer<CurrencyStates.CurrencyState>(
                 currencyList: action.currencyList
             };
         }),
-    
+
     on(CurrencyActions.loadCurrencyHistorySuccess,
         (state, action): CurrencyStates.CurrencyState => {
             return {
                 ...state,
-                selectedCurrencyHistory: action.history
+                selectedCurrencyHistory: action.history,
+                error: null
             };
         }),
     on(CurrencyActions.loadCurrencyHistoryFailure,
@@ -59,13 +62,13 @@ export const currencyReducer = createReducer<CurrencyStates.CurrencyState>(
                 selectedCurrency: action.currencyCode
             };
         }),
-        on(CurrencyActions.updateTopRateType,
-            (state, action): CurrencyStates.CurrencyState => {
-                return {
-                    ...state,
-                    topRatesType: action.rateType
-                };
-            })
+    on(CurrencyActions.updateTopRateType,
+        (state, action): CurrencyStates.CurrencyState => {
+            return {
+                ...state,
+                topRatesType: action.rateType
+            };
+        })
 
 
 );
