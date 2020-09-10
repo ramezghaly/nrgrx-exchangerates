@@ -1,0 +1,8 @@
+<app-currency-selector
+label = "Base Currency"
+[selectedCurrency] = "baseCurrency"
+[currencyList] = "currencyList"
+[currencyToDisable] = "baseCurrency"
+(selectedCurrencyChange)="baseCurrencyChanged($event)"
+></app-currency-selector>
+<router-outlet></router-outlet>

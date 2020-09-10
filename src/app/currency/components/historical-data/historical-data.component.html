@@ -1,0 +1,9 @@
+<app-currency-selector
+label = "Select Currency To View History"
+[selectedCurrency] = "selectedCurrency"
+[currencyList] = "currencyList"
+[currencyToDisable] = "selectedCurrency"
+(selectedCurrencyChange)="selectedCurrencyChanged($event)"
+></app-currency-selector>
+
+<app-bar-chart [rates]= "exhchangeRateHistory?.history"></app-bar-chart>

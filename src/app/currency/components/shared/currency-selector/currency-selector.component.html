@@ -1,0 +1,10 @@
+<mat-form-field>
+    <mat-label>{{label}}</mat-label>
+    <mat-select [value]="selectedCurrency" (selectionChange)="selectedCurrencyChanged($event)">
+        <ng-container *ngFor="let item of currencyList">
+            <mat-option [disabled]="currencyToDisable && item === currencyToDisable" [value]="item">
+                {{item}}
+            </mat-option>
+        </ng-container>
+    </mat-select>
+</mat-form-field>

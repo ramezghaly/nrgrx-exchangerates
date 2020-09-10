@@ -1,19 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Routes, RouterModule } from '@angular/router';
 import { SharedModule } from '../shared/shared.module'
 import { LayoutComponent } from './components/layout/layout.component';
 import { HomeComponent } from './components/home/home.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
-
-const routes: Routes = [];
+import { StoreModule } from '@ngrx/store';
+import { coreReducer } from './state/core.reducer'
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [LayoutComponent, HomeComponent, NotFoundComponent],
   imports: [
     CommonModule,
-    RouterModule.forChild(routes),
-    SharedModule
+    RouterModule,    
+    SharedModule,
+    StoreModule.forFeature('core', coreReducer)    
   ]
 })
 export class CoreModule { }

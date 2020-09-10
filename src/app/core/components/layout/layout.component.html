@@ -1,1 +1,37 @@
-<router-outlet></router-outlet>
+<mat-sidenav-container>
+  <mat-sidenav #sidenav mode="over" class="mat-elevation-z8">
+    <mat-nav-list>
+      <a mat-list-item routerLink="/currency/rates" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>euro</mat-icon>
+        <h4 mat-line>Latest Rates</h4>
+      </a>
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/currency/history" (click)="sidenav.toggle()">
+        <mat-icon mat-list-icon>poll</mat-icon>
+        <h4 mat-line>Last 30 Days</h4>
+      </a>  
+      <mat-divider></mat-divider>
+      <a mat-list-item routerLink="/currency/top-rates" (click)="sidenav.toggle()">  
+        <mat-icon mat-list-icon>trending_up</mat-icon>
+        <h4 mat-line>Top 5</h4>
+      </a>
+      <mat-divider></mat-divider>
+
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div fxLayout="column">
+      <mat-toolbar color="primary" fxAlign="top" fxLayoutAlign="center center" class="mat-elevation-z8">
+        <button mat-icon-button aria-label="Toggle Menu" (click)="sidenav.toggle()">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <div fxFlex="auto"></div>
+        <div>Currency Exchange Rates</div>
+        <div fxFlex="auto"></div>
+      </mat-toolbar>
+      <div fxAlign="top" class="content-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
