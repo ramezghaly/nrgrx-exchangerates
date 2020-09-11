@@ -36,7 +36,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatToolbarModule,
     MatSidenavModule
   ],
-  exports:[
+  exports: [
     CdkTableModule,
     MatButtonModule,
     MatButtonToggleModule,

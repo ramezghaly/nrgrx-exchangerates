@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError, of } from 'rxjs';
 import { catchError, tap, map, switchMap } from 'rxjs/operators';
 import { ExchangeRates, ExchangeRate, ExchangeRateHistory } from '../models'
@@ -116,16 +116,8 @@ export class ExchangeRatesService {
 
 
   private handleError(err: any) {
-    let errorMessage: string;
-    if (err.error instanceof ErrorEvent) {
-      // A client-side or network error occurred.
-      errorMessage = `An error occurred: ${err.error.message}`;
-    } else {
-      // The backend returned an unsuccessful response code.      
-      errorMessage = `Server Error ${err.status}: ${err.body.error}`;
-    }
     console.error(err);
-    return throwError(errorMessage);
+    return throwError(err.message);
   }
 
 }
