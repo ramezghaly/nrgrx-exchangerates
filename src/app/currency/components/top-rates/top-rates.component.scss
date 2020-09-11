@@ -4,4 +4,15 @@ table{
 
 td , th{
 text-align: center!important;
+min-width: 50px;
 }
+
+.responsive {
+    height: auto;
+    overflow-x: auto;
+    overflow-y: hidden;
+  }
+  .responsive > table tr th,
+  .responsive > table tr td {
+    white-space: normal !important;
+  }

@@ -1,7 +1,18 @@
-table{
-    width:100%;
+table {
+  width: 100%;
 }
 
-td , th{
-text-align: center!important;
+td,
+th {
+  text-align: center !important;
+}
+
+.responsive {
+  height: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+.responsive > table tr th,
+.responsive > table tr td {
+  white-space: normal !important;
 }
